@@ -29,6 +29,4 @@ public class Pair {
         this.row = row;
         this.column = column;
     }
-
-
 }
