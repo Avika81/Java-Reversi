@@ -1,6 +1,4 @@
-
 package ReversiBase;
-
 
 import javafx.scene.paint.Color;
 
@@ -13,7 +11,7 @@ public class GamePiece {
      * @return true if empty false otherwise
      */
     public boolean isEmpty() {
-        return isEmpty;
+        return this.isEmpty;
     }
 
     /**
@@ -39,7 +37,7 @@ public class GamePiece {
      * @param MyColor a given MyColor
      */
     public void setColor(Color MyColor) {
-        this.MyColor = MyColor;
         this.isEmpty = false;
+        this.MyColor = MyColor;
     }
 }

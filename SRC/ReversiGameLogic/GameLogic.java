@@ -20,11 +20,14 @@ public abstract class GameLogic {
             display.printString("Current board:");
             display.printBoard(board);
             display.printString("The board is full");
+
             if (this.whoWon() == GameWinner.Draw) {
                 display.printString("It's a draw");
-            } else if (this.whoWon() == GameWinner.BlackWon) {
+            }
+            else if (this.whoWon() == GameWinner.BlackWon) {
                 display.printString(this.FirstColor.toString() + " player wins");
-            } else {
+            }
+            else {
                 display.printString(this.SecondColor.toString() + " player wins");
             }
             return true;
@@ -33,9 +36,11 @@ public abstract class GameLogic {
             display.printString("No more moves available for both players: ");
             if (this.whoWon() == GameWinner.Draw) {
                 display.printString("It's a draw");
-            } else if (this.whoWon() == GameWinner.BlackWon) {
+            }
+            else if (this.whoWon() == GameWinner.BlackWon) {
                 display.printString(this.FirstColor.toString() + " player wins");
-            } else {
+            }
+            else {
                 display.printString(this.SecondColor.toString() + " player wins");
             }
             return true;
@@ -44,7 +49,7 @@ public abstract class GameLogic {
     }
 
     /**
-     * This method returns the current board (used for cloning).
+     * standart getter
      */
     public Board getBoard() {
         return this.gameBoard;
@@ -56,23 +61,24 @@ public abstract class GameLogic {
      * @return who won the game, or draw
      */
     public GameWinner whoWon() {
-        int firstPlayerCells = 0;
-        int secondPlayerCells = 0;
         int size = this.getBoardSize();
+        int firstScore = 0;
+        int secondScore = 0;
+
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor().toString()
                         .equals(SecondColor.toString())) {
-                    secondPlayerCells++;
+                    secondScore++;
                 } else if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor().toString()
                         .equals(FirstColor.toString())) {
-                    firstPlayerCells++;
+                    firstScore++;
                 }
             }
         }
-        if (firstPlayerCells > secondPlayerCells) {
+        if (firstScore > secondScore) {
             return GameWinner.BlackWon;
-        } else if (secondPlayerCells > firstPlayerCells) {
+        } else if (secondScore > firstScore) {
             return GameWinner.WhiteWon;
         } else {
             return GameWinner.Draw;
@@ -107,24 +113,24 @@ public abstract class GameLogic {
     /**
      * thic method gets first player advantage
      *
-     * @return return the first player advantage
+     * @return return the first player advantage (can be negeative)
      */
     public int getFirstPlayerAdvantage() {
-        int firstPlayerCells = 0;
-        int secondPlayerCells = 0;
+        int firstScore = 0;
+        int secondScore = 0;
         int boardSize = this.getBoardSize();
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor().toString()
                         .equals(this.SecondColor.toString())) {
-                    secondPlayerCells++;
+                    secondScore++;
                 } else if (this.gameBoard.getCellStatus(new Pair(i, j))
                         .getColor().toString().equals(this.FirstColor.toString())) {
-                    firstPlayerCells++;
+                    firstScore++;
                 }
             }
         }
-        return (firstPlayerCells - secondPlayerCells);
+        return (firstScore - secondScore); //returns the diffrence.
     }
 
     /**
@@ -133,17 +139,17 @@ public abstract class GameLogic {
      * @return return the first player score
      */
     public int getFirstPlayerScore() {
-        int firstPlayerCells = 0;
+        int firstScore = 0;
         int boardSize = this.getBoardSize();
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor().toString()
                         .equals(this.FirstColor.toString())) {
-                    firstPlayerCells++;
+                    firstScore++;
                 }
             }
         }
-        return firstPlayerCells;
+        return firstScore;
     }
 
     /**
@@ -152,17 +158,21 @@ public abstract class GameLogic {
      * @return return the second player score
      */
     public int getSecondPlayerScore() {
-        int secondPlayerCells = 0;
         int boardSize = this.getBoardSize();
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
+        int secondScore = 0;
+
+        for (int i = 0; i < boardSize; i++)
+        {
+            for (int j = 0; j < boardSize; j++)
+            {
                 if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor()
-                        .toString().equals(this.SecondColor.toString())) {
-                    secondPlayerCells++;
+                        .toString().equals(this.SecondColor.toString()))
+                {
+                    secondScore++;
                 }
             }
         }
-        return secondPlayerCells;
+        return secondScore;
     }
 
     /**

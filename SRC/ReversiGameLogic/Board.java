@@ -20,14 +20,16 @@ public class Board {
      */
     public Board(int size, Color defaultColorPlayer1, Color defaultColorPlayer2) {
         this.SizeOfBoard = size;
-        gamePieces = new GamePiece[size][size];
         this.defaultColorPlayer1 = defaultColorPlayer1;
         this.defaultColorPlayer2 = defaultColorPlayer2;
+
+        gamePieces = new GamePiece[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 this.PiecesMatrix[i][j] = new GamePiece();
             }
         }
+
         this.PiecesMatrix[this.SizeOfBoard / 2 - 1][this.SizeOfBoard / 2 - 1].setColor(defaultColorPlayer2);
         this.PiecesMatrix[this.SizeOfBoard / 2][this.SizeOfBoard / 2].setColor(defaultColorPlayer2);
         this.PiecesMatrix[this.SizeOfBoard / 2 - 1][this.SizeOfBoard / 2].setColor(defaultColorPlayer1);
@@ -62,8 +64,10 @@ public class Board {
         if (p.getRow() >= 0 && p.getRow() < this.SizeOfBoard && p.getCol() >= 0 && p.getCol() < this.SizeOfBoard) {
             return this.PiecesMatrix[p.getRow()][p.getCol()];
         }
-        GamePiece emptyGamePiece = new GamePiece();
-        return emptyGamePiece;
+        else{
+            GamePiece emptyGamePiece = new GamePiece();
+            return emptyGamePiece;
+        }
     }
 
     /**
@@ -93,8 +97,9 @@ public class Board {
      * @return true/false.
      */
     public boolean isBoardFull() {
-        for (int i = 0; i < this.SizeOfBoard; i++) {
-            for (int j = 0; j < this.SizeOfBoard; j++) {
+        int i,j;
+        for (i = 0; i < this.SizeOfBoard; i++) {
+            for (j = 0; j < this.SizeOfBoard; j++) {
                 if (this.PiecesMatrix[i][j].isEmpty()) {
                     return false;
                 }
@@ -104,9 +109,7 @@ public class Board {
     }
 
     /**
-     * Return the size of the board.
-     *
-     * @return
+     * standart getter
      */
     public int getSize() {
         return this.SizeOfBoard;
