@@ -8,30 +8,30 @@ import javafx.scene.paint.Color;
 public class Board {
     private GamePiece[][] gamePieces;
     private int size;
-    private Color startingColor;
-    private Color notStartingColor;
+    private Color defaultColorPlayer1;
+    private Color defaultColorPlayer2;
 
     /**
      * This constructor creates a board from an inputted size.
      *
      * @param size-            wanted size for the board.
-     * @param startingColor    given starting color
-     * @param notStartingColor given not starting color
+     * @param defaultColorPlayer1    given starting color
+     * @param defaultColorPlayer2 given not starting color
      */
-    public Board(int size, Color startingColor, Color notStartingColor) {
+    public Board(int size, Color defaultColorPlayer1, Color defaultColorPlayer2) {
         this.size = size;
         gamePieces = new GamePiece[size][size];
-        this.startingColor = startingColor;
-        this.notStartingColor = notStartingColor;
+        this.defaultColorPlayer1 = defaultColorPlayer1;
+        this.defaultColorPlayer2 = defaultColorPlayer2;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 this.gamePieces[i][j] = new GamePiece();
             }
         }
-        this.gamePieces[this.size / 2 - 1][this.size / 2 - 1].setColor(notStartingColor);
-        this.gamePieces[this.size / 2][this.size / 2].setColor(notStartingColor);
-        this.gamePieces[this.size / 2 - 1][this.size / 2].setColor(startingColor);
-        this.gamePieces[this.size / 2][this.size / 2 - 1].setColor(startingColor);
+        this.gamePieces[this.size / 2 - 1][this.size / 2 - 1].setColor(defaultColorPlayer2);
+        this.gamePieces[this.size / 2][this.size / 2].setColor(defaultColorPlayer2);
+        this.gamePieces[this.size / 2 - 1][this.size / 2].setColor(defaultColorPlayer1);
+        this.gamePieces[this.size / 2][this.size / 2 - 1].setColor(defaultColorPlayer1);
     }
 
     /**
@@ -100,7 +100,7 @@ public class Board {
      * @return color of p[layer 1
      */
     public Color getStartingColor() {
-        return this.startingColor;
+        return this.defaultColorPlayer1;
     }
 
     /**
@@ -109,7 +109,7 @@ public class Board {
      * @return color of p[layer 2
      */
     public Color getNotStartingColor() {
-        return this.notStartingColor;
+        return this.defaultColorPlayer2;
     }
 
 }
