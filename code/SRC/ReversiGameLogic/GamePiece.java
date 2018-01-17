@@ -29,7 +29,7 @@ public class GamePiece {
      */
     public Color getColor() {
         if (this.isEmpty) {
-            return Color.WHEAT;
+            return Color.WHEAT; //default value
         }
         return mColor;
     }

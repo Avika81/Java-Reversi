@@ -51,7 +51,7 @@ public class ConsoleDisplay implements Display {
         }
     }
     /**
-     * this method prints possible Moves
+     * this method prints possible Moves for player x position.
      * @param positions given positions
      * @param moves number of moves
      */
@@ -68,13 +68,12 @@ public class ConsoleDisplay implements Display {
         System.out.println("");
     }
     /**
-     * this method prints a pair.
+     * this method prints a pair. (standart function)
      * @param p a given pair
      */
     @Override
     public void printPair(Pair p) {
         System.out.print("(" + (p.getRow() + 1) + "," + (p.getCol() + 1) + ")");
-
     }
     /**
      * this method prints a stribf.

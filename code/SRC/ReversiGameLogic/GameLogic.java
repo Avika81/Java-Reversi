@@ -1,6 +1,4 @@
-
 package ReversiBase;
-
 
 import javafx.scene.paint.Color;
 
@@ -8,11 +6,20 @@ public abstract class GameLogic {
     protected Board board;
     protected Color startingColor, notStartingColor;
 
+    public GameLogic() {
+    }
+
     /**
-     * This method returns the current board (used for cloning).
+     * This constructor creates a basic game logic abstract class.
+     *
+     * @param board            inputted board.
+     * @param startingColor    inputted startingColor.
+     * @param notStartingColor inputted notStartingColor.
      */
-    public Board getBoard() {
-        return this.board;
+    public GameLogic(Board board, Color startingColor, Color notStartingColor) {
+        this.board = board;
+        this.notStartingColor = notStartingColor;
+        this.startingColor = startingColor;
     }
 
     /**
@@ -53,22 +60,6 @@ public abstract class GameLogic {
         return this.board.getSize();
     }
 
-    public GameLogic() {
-    }
-
-    /**
-     * This constructor creates a basic game logic abstract class.
-     *
-     * @param board            inputted board.
-     * @param startingColor    inputted startingColor.
-     * @param notStartingColor inputted notStartingColor.
-     */
-    public GameLogic(Board board, Color startingColor, Color notStartingColor) {
-        this.board = board;
-        this.notStartingColor = notStartingColor;
-        this.startingColor = startingColor;
-    }
-
     /**
      * This method checks if the game should end.
      *
@@ -104,6 +95,12 @@ public abstract class GameLogic {
         return false;
     }
 
+    /**
+     * This method returns the current board (used for cloning).
+     */
+    public Board getBoard() {
+        return this.board;
+    }
 
     /**
      * thic method gets first player advantage
@@ -127,7 +124,6 @@ public abstract class GameLogic {
         }
         return (firstPlayerCells - secondPlayerCells);
     }
-
     /**
      * thic method gets first player score
      *
@@ -167,6 +163,13 @@ public abstract class GameLogic {
     }
 
     /**
+     * Enum for game winning.
+     */
+    enum GameWinner {
+        Draw, BlackWon, WhiteWon
+    }
+
+    /**
      * Pure virtual function to check if the move is valid.
      *
      * @param p         wanted cell.
@@ -177,14 +180,6 @@ public abstract class GameLogic {
      */
     abstract public boolean validMove(Pair p, ScanDirection scanD, Color opponentP, Color player);
 
-    /**
-     * Pure virtual function to update all the possible moves.
-     *
-     * @param pairArr inputted array to update.
-     * @param index   number of moves.
-     * @param player  player's color.
-     */
-    abstract public int possibleMoves(Pair pairArr[], int index, Color player);
 
     /**
      * Pure virtual function to check if the cell is a possible move.
@@ -216,16 +211,18 @@ public abstract class GameLogic {
     abstract public boolean checkInput(Pair p, Pair arr[], int count);
 
     /**
+     * Pure virtual function to update all the possible moves.
+     *
+     * @param pairArr inputted array to update.
+     * @param index   number of moves.
+     * @param player  player's color.
+     */
+    abstract public int possibleMoves(Pair pairArr[], int index, Color player);
+
+    /**
      * Enum for the board scanning directions.
      */
     enum ScanDirection {
         NorthWest, North, NorthEast, West, East, SouthWest, South, SouthEast
-    }
-
-    /**
-     * Enum for game winning.
-     */
-    enum GameWinner {
-        Draw, BlackWon, WhiteWon
     }
 }
