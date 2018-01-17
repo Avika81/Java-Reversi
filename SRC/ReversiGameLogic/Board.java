@@ -35,6 +35,24 @@ public class Board {
     }
 
     /**
+     * Return the color of the player1.
+     *
+     * @return color of p[layer 1
+     */
+    public Color getStartingColor() {
+        return this.defaultColorPlayer1;
+    }
+
+    /**
+     * Return the color of the player2.
+     *
+     * @return color of p[layer 2
+     */
+    public Color getNotStartingColor() {
+        return this.defaultColorPlayer2;
+    }
+
+    /**
      * This method returns status of desired cell.
      *
      * @param p inputted pair for getting the cell.
@@ -92,24 +110,6 @@ public class Board {
      */
     public int getSize() {
         return this.SizeOfBoard;
-    }
-
-    /**
-     * Return the color of the player1.
-     *
-     * @return color of p[layer 1
-     */
-    public Color getStartingColor() {
-        return this.defaultColorPlayer1;
-    }
-
-    /**
-     * Return the color of the player2.
-     *
-     * @return color of p[layer 2
-     */
-    public Color getNotStartingColor() {
-        return this.defaultColorPlayer2;
     }
 
 }
