@@ -1,4 +1,3 @@
-
 package ReversiGUI;
 
 import java.io.BufferedReader;

@@ -1,5 +1,4 @@
-secondColorpackage ReversiGUI;
-
+second Colorpackage ReversiGUI;
 
 //tons of imports for the gui:
 import ReversiBase.Board;

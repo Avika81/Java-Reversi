@@ -6,7 +6,42 @@ import javafx.scene.paint.Color;
 
 public abstract class GameLogic {
     protected Board board;
-    protected Color startingColor, notStartingColor;
+    protected Color FirstColor, SecondColor;
+
+    /**
+     * This method checks if the game should end.
+     *
+     * @param noMoreActionsB boolean for the black player possible move (have moves or don't have moves).
+     * @param noMoreActionsW boolean for the while player possible move (have moves or don't have moves).
+     * @return
+     */
+    public boolean checkAndAnnounceFinish(boolean noMoreActionsB, boolean noMoreActionsW, Display display) {
+        if (this.board.isBoardFull()) {
+            display.printString("Current board:");
+            display.printBoard(board);
+            display.printString("The board is full");
+            if (this.whoWon() == GameWinner.Draw) {
+                display.printString("It's a draw");
+            } else if (this.whoWon() == GameWinner.BlackWon) {
+                display.printString(this.FirstColor.toString() + " player wins");
+            } else {
+                display.printString(this.SecondColor.toString() + " player wins");
+            }
+            return true;
+        }
+        if (noMoreActionsB && noMoreActionsW) {
+            display.printString("No more moves available for both players: ");
+            if (this.whoWon() == GameWinner.Draw) {
+                display.printString("It's a draw");
+            } else if (this.whoWon() == GameWinner.BlackWon) {
+                display.printString(this.FirstColor.toString() + " player wins");
+            } else {
+                display.printString(this.SecondColor.toString() + " player wins");
+            }
+            return true;
+        }
+        return false;
+    }
 
     /**
      * This method returns the current board (used for cloning).
@@ -27,10 +62,10 @@ public abstract class GameLogic {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (this.board.getCellStatus(new Pair(i, j)).getColor().toString()
-                        .equals(notStartingColor.toString())) {
+                        .equals(SecondColor.toString())) {
                     secondPlayerCells++;
                 } else if (this.board.getCellStatus(new Pair(i, j)).getColor().toString()
-                        .equals(startingColor.toString())) {
+                        .equals(FirstColor.toString())) {
                     firstPlayerCells++;
                 }
             }
@@ -60,50 +95,14 @@ public abstract class GameLogic {
      * This constructor creates a basic game logic abstract class.
      *
      * @param board            inputted board.
-     * @param startingColor    inputted startingColor.
-     * @param notStartingColor inputted notStartingColor.
+     * @param FirstColor    inputted FirstColor.
+     * @param SecondColor inputted SecondColor.
      */
-    public GameLogic(Board board, Color startingColor, Color notStartingColor) {
+    public GameLogic(Board board, Color FirstColor, Color SecondColor) {
         this.board = board;
-        this.notStartingColor = notStartingColor;
-        this.startingColor = startingColor;
+        this.SecondColor = SecondColor;
+        this.FirstColor = FirstColor;
     }
-
-    /**
-     * This method checks if the game should end.
-     *
-     * @param noMoreActionsB boolean for the black player possible move (have moves or don't have moves).
-     * @param noMoreActionsW boolean for the while player possible move (have moves or don't have moves).
-     * @return
-     */
-    public boolean checkAndAnnounceFinish(boolean noMoreActionsB, boolean noMoreActionsW, Display display) {
-        if (this.board.isBoardFull()) {
-            display.printString("Current board:");
-            display.printBoard(board);
-            display.printString("The board is full");
-            if (this.whoWon() == GameWinner.Draw) {
-                display.printString("It's a draw");
-            } else if (this.whoWon() == GameWinner.BlackWon) {
-                display.printString(this.startingColor.toString() + " player wins");
-            } else {
-                display.printString(this.notStartingColor.toString() + " player wins");
-            }
-            return true;
-        }
-        if (noMoreActionsB && noMoreActionsW) {
-            display.printString("No more moves available for both players: ");
-            if (this.whoWon() == GameWinner.Draw) {
-                display.printString("It's a draw");
-            } else if (this.whoWon() == GameWinner.BlackWon) {
-                display.printString(this.startingColor.toString() + " player wins");
-            } else {
-                display.printString(this.notStartingColor.toString() + " player wins");
-            }
-            return true;
-        }
-        return false;
-    }
-
 
     /**
      * thic method gets first player advantage
@@ -117,10 +116,10 @@ public abstract class GameLogic {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 if (this.board.getCellStatus(new Pair(i, j)).getColor().toString()
-                        .equals(this.notStartingColor.toString())) {
+                        .equals(this.SecondColor.toString())) {
                     secondPlayerCells++;
                 } else if (this.board.getCellStatus(new Pair(i, j))
-                        .getColor().toString().equals(this.startingColor.toString())) {
+                        .getColor().toString().equals(this.FirstColor.toString())) {
                     firstPlayerCells++;
                 }
             }
@@ -139,7 +138,7 @@ public abstract class GameLogic {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 if (this.board.getCellStatus(new Pair(i, j)).getColor().toString()
-                        .equals(this.startingColor.toString())) {
+                        .equals(this.FirstColor.toString())) {
                     firstPlayerCells++;
                 }
             }
@@ -158,7 +157,7 @@ public abstract class GameLogic {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 if (this.board.getCellStatus(new Pair(i, j)).getColor()
-                        .toString().equals(this.notStartingColor.toString())) {
+                        .toString().equals(this.SecondColor.toString())) {
                     secondPlayerCells++;
                 }
             }
