@@ -43,6 +43,15 @@ public class MenuController {
     }
 
     /**
+     * This method exits the menu and closes the game.
+     */
+    @FXML
+    protected void exitGame() {
+        Stage stage = (Stage) Exit.getScene().getWindow();
+        stage.close();
+    }
+    
+    /**
      * This method starts the settings.
      */
     @FXML
@@ -59,14 +68,4 @@ public class MenuController {
             e.printStackTrace();
         }
     }
-
-    /**
-     * This method exits the menu and closes the game.
-     */
-    @FXML
-    protected void exitGame() {
-        Stage stage = (Stage) Exit.getScene().getWindow();
-        stage.close();
-    }
-
 }
