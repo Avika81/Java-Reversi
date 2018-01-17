@@ -1,0 +1,72 @@
+commit 60def98941118a4a593a985759e6cddaed4b6a7c
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:35:43 2018 +0200
+
+    added all the project! finally working now
+
+commit d23c4cdbc81de674e39774b8c2818ebea0546e97
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:34:22 2018 +0200
+
+    added gui classes (after some debugs)
+
+commit bcba944c3ed52491988d338c5119c82e29a89f0f
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:33:39 2018 +0200
+
+    another xml file :(
+
+commit c19d2f68ecab0188d27c352fb47b24c58500c78f
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:33:18 2018 +0200
+
+    nothing special.
+    added java files
+
+commit f5913ba4bc4cefd9e2535bab6f594a4768f4c74a
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:32:54 2018 +0200
+
+    added the wanted controller applications
+
+commit d3d2200e7e1111326b64d9bb6dfad9763b6c8f89
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:32:18 2018 +0200
+
+    added the needed settings classes (hopefully it works)
+
+commit d3567b073b5416ed8722c66cf28af682be0b1107
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:31:17 2018 +0200
+
+    FINISHED THE GAME LOGIC!!!! working (I hope)
+
+commit 822e417c245977029c7c6e473fb30e734a08097e
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:30:19 2018 +0200
+
+    added more classes needed for the project
+
+commit a174430cbcab7c4a56c117beb8b0a5a987b0d930
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:28:56 2018 +0200
+
+    added the player and twicked th project a bit
+
+commit 27c291de991254f86e3499d00271ecf446547e09
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:28:22 2018 +0200
+
+    added the ami game classes.
+
+commit 1e0ead293b9eb3781ffebb35f2bb64fc41856ac2
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 10:26:36 2018 +0200
+
+    added the board class to the project
+
+commit 5af55180fbda34866d154f48404d8297a50cde41
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Wed Jan 17 09:57:13 2018 +0200
+
+    Initial commit
