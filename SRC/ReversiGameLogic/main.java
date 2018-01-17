@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
  * The main of the console game.
  */
 public class main {
+  //starts the main of the program
     public static void consoleMain(String[] args) {
         Game game;
         Display display = new ConsoleDisplay();
@@ -14,6 +15,5 @@ public class main {
         GameLogic gameLogic = new RegularGameLogic(board, Color.BLACK, Color.WHITE);
         game = new Game(gameLogic, display, Color.BLACK, Color.WHITE);
         game.run();
-
     }
 }
