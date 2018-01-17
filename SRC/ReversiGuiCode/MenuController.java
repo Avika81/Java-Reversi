@@ -19,11 +19,11 @@ import java.io.IOException;
 public class MenuController {
 
     @FXML
-    private Button Start_Game;
+    private Button startButton;
     @FXML
     private Button Settings;
     @FXML
-    private Button Exit;
+    private Button ExitButton;
 
     /**
      * This method starts the game.
@@ -31,7 +31,7 @@ public class MenuController {
     @FXML
     protected void startGame() {
         try {
-            Stage stage = (Stage) Start_Game.getScene().getWindow();
+            Stage stage = (Stage) startButton.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Game.fxml"));
             HBox root = (HBox) loader.load();
             Scene reversiGameScene = new Scene(root, 800, 605);
@@ -47,10 +47,10 @@ public class MenuController {
      */
     @FXML
     protected void exitGame() {
-        Stage stage = (Stage) Exit.getScene().getWindow();
+        Stage stage = (Stage) ExitButton.getScene().getWindow();
         stage.close();
     }
-    
+
     /**
      * This method starts the settings.
      */

@@ -55,6 +55,70 @@ public class GameController implements Initializable {
     private Circle colorPlayer;
     private boolean firstIter = true;
 
+    /**
+     * This method initializes the game controller.
+     *
+     * @param location  isn't used.
+     * @param resources isn't used.
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.noMoreActionsP1 = false;
+        this.noMoreActionsP2 = false;
+        SettingsParser parser = new SettingsParser();
+        parser.parseSettingsFile();
+        int size = parser.getBoardSize();
+        String startingPlayer = parser.getStartingPlayer();
+        if (startingPlayer.equals("player1")) {
+            firstColor = parser.getPlayer1Color();
+            secondColor = parser.getPlayer2Color();
+        } else {
+            firstColor = parser.getPlayer2Color();
+            secondColor = parser.getPlayer1Color();
+        }
+        this.board = new Board(size, Color.web(firstColor), Color.web(secondColor));
+        this.guiBoard = new GuiBoard(board);
+        root.getChildren().add(0, guiBoard);
+        root.setAlignment(Pos.TOP_LEFT);
+        guiBoard.draw();
+        VBox gameStatus = new VBox();
+        currentPlayer = new Label("\nCurrent player: Player 1");
+        if(firstIter) {
+            colorPlayer = new Circle(10, Color.web(this.firstColor));
+        }
+        firstIter = false;
+        player1Score = new Label("First player score: 2");
+        player2Score = new Label("Second player score: 2");
+        message = new Label("Player 1:\nIt's your move!");
+        extraMessage = new Label("");
+        extraMessage.setFont(new Font(15));
+        message.setFont(new Font(15));
+        this.quit = new Button("Quit");
+        this.quit.setOnAction(ev -> {
+            loadFXML("MenuControllerFXML.fxml", 650, 600, ev);
+        });
+        root.setAlignment(Pos.TOP_LEFT);
+        root.setSpacing(20);
+        gameStatus.setSpacing(10);
+        root.widthProperty().addListener((observable, oldValue, newValue) -> {
+            double boardNewWidth = newValue.doubleValue() - 200;
+            guiBoard.setPrefWidth(boardNewWidth);
+            guiBoard.draw();
+        });
+
+        root.heightProperty().addListener((observable, oldValue, newValue) -> {
+            guiBoard.setPrefHeight(newValue.doubleValue());
+            guiBoard.draw();
+        });
+        gameStatus.getChildren().addAll(currentPlayer, colorPlayer, player1Score, player2Score, message, extraMessage, quit);
+        root.getChildren().add(gameStatus);
+        this.isPlayer1 = true;
+        this.gameLogicObject = new RegularGameLogic(this.board, Color.web(this.firstColor), Color.web(this.secondColor));
+        guiBoard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            Pair move = convertClickToPair(e.getX(), e.getY());
+            this.singleMove(move);
+        });
+    }
 
     /**
      * Perform a single move of a player (after a mouse click on the board has been made)
@@ -193,72 +257,6 @@ public class GameController implements Initializable {
             }
         }
     }
-
-    /**
-     * This method initializes the game controller.
-     *
-     * @param location  isn't used.
-     * @param resources isn't used.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.noMoreActionsP1 = false;
-        this.noMoreActionsP2 = false;
-        SettingsParser parser = new SettingsParser();
-        parser.parseSettingsFile();
-        int size = parser.getBoardSize();
-        String startingPlayer = parser.getStartingPlayer();
-        if (startingPlayer.equals("player1")) {
-            firstColor = parser.getPlayer1Color();
-            secondColor = parser.getPlayer2Color();
-        } else {
-            firstColor = parser.getPlayer2Color();
-            secondColor = parser.getPlayer1Color();
-        }
-        this.board = new Board(size, Color.web(firstColor), Color.web(secondColor));
-        this.guiBoard = new GuiBoard(board);
-        root.getChildren().add(0, guiBoard);
-        root.setAlignment(Pos.TOP_LEFT);
-        guiBoard.draw();
-        VBox gameStatus = new VBox();
-        currentPlayer = new Label("\nCurrent player: Player 1");
-        if(firstIter) {
-            colorPlayer = new Circle(10, Color.web(this.firstColor));
-        }
-        firstIter = false;
-        player1Score = new Label("First player score: 2");
-        player2Score = new Label("Second player score: 2");
-        message = new Label("Player 1:\nIt's your move!");
-        extraMessage = new Label("");
-        extraMessage.setFont(new Font(15));
-        message.setFont(new Font(15));
-        this.quit = new Button("Quit");
-        this.quit.setOnAction(ev -> {
-            loadFXML("MenuControllerFXML.fxml", 650, 600, ev);
-        });
-        root.setAlignment(Pos.TOP_LEFT);
-        root.setSpacing(20);
-        gameStatus.setSpacing(10);
-        root.widthProperty().addListener((observable, oldValue, newValue) -> {
-            double boardNewWidth = newValue.doubleValue() - 200;
-            guiBoard.setPrefWidth(boardNewWidth);
-            guiBoard.draw();
-        });
-
-        root.heightProperty().addListener((observable, oldValue, newValue) -> {
-            guiBoard.setPrefHeight(newValue.doubleValue());
-            guiBoard.draw();
-        });
-        gameStatus.getChildren().addAll(currentPlayer, colorPlayer, player1Score, player2Score, message, extraMessage, quit);
-        root.getChildren().add(gameStatus);
-        this.isPlayer1 = true;
-        this.gameLogicObject = new RegularGameLogic(this.board, Color.web(this.firstColor), Color.web(this.secondColor));
-        guiBoard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            Pair move = convertClickToPair(e.getX(), e.getY());
-            this.singleMove(move);
-        });
-    }
-
 
     /**
      * This method loads the FXML (to return back to the menu).

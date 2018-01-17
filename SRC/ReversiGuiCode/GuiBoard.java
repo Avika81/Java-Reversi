@@ -25,8 +25,8 @@ import static java.lang.Math.min;
  */
 public class GuiBoard extends GridPane {
     private Board board;
-    private double cellHight;
-    private double cellWidth;
+    private double HightCell;
+    private double widthCell;
 
     /**
      * Constructor from a board.
@@ -54,20 +54,20 @@ public class GuiBoard extends GridPane {
         double height = this.getPrefHeight();
         double width = this.getPrefWidth();
         double cellHeight = height / board.getSize();
-        double cellWidth = width / board.getSize();
-        double radius = (Math.min(cellHeight, cellWidth) / 2);
-        this.cellHight = (height / board.getSize()) + 1;
-        this.cellWidth = (width / board.getSize()) + 1;
+        double widthCell = width / board.getSize();
+        double radius = (Math.min(cellHeight, widthCell) / 2);
+        this.HightCell = (height / board.getSize()) + 1;
+        this.widthCell = (width / board.getSize()) + 1;
         for (int i = 0; i < board.getSize(); i++) {
             for (int j = 0; j < board.getSize(); j++) {
-                Rectangle rec = new Rectangle(cellWidth, cellHeight, Color.WHEAT);
+                Rectangle rec = new Rectangle(widthCell, cellHeight, Color.WHEAT);
                 rec.setStroke(Color.BLACK);
                 rec.setStrokeWidth(1);
                 StackPane pane = new StackPane();
                 pane.getChildren().addAll(rec);
                 //this.add(pane, j, i);
                 if (!board.getGamePieces()[i][j].isEmpty()) {
-                    pane.getChildren().add(new Circle(((cellWidth + 1) / 2) * i,
+                    pane.getChildren().add(new Circle(((widthCell + 1) / 2) * i,
                             ((cellHeight + 1) / 2) * j, radius, board.getGamePieces()[i][j].getColor()));
                     this.add(pane, j, i);
                 } else {
@@ -82,8 +82,8 @@ public class GuiBoard extends GridPane {
      *
      * @return cell width.
      */
-    public double getCellwidth() {
-        return this.cellWidth;
+    public double getwidthCell() {
+        return this.widthCell;
     }
 
     /**
@@ -91,8 +91,8 @@ public class GuiBoard extends GridPane {
      *
      * @return cell height.
      */
-    public double getCellHight() {
-        return this.cellHight;
+    public double getHightCell() {
+        return this.HightCell;
     }
 
 }
