@@ -6,9 +6,9 @@ import javafx.scene.paint.Color;
 
 public class Game {
 
-    private boolean player1Turn;
-    private Player player1;
-    private Player player2;
+    private boolean isPlayer1TurnNow;
+    private Player Player1;
+    private Player Player2;
     private Display display;
     private GameLogic gameLogic;
 
@@ -20,9 +20,9 @@ public class Game {
     public Game(GameLogic gameLogic, Display display, Color player1Color, Color player2Color) {
         this.gameLogic = gameLogic;
         this.display = display;
-        this.player1Turn = true;
-        this.player1 = new HumanPlayer(true, player1Color);
-        this.player2 = new HumanPlayer(false, player2Color);
+        this.isPlayer1TurnNow = true;
+        this.Player1 = new HumanPlayer(true, player1Color);
+        this.Player2 = new HumanPlayer(false, player2Color);
 
     }
 
@@ -40,13 +40,13 @@ public class Game {
             //new
             Pair pArr[] = new Pair[this.gameLogic.getBoardSize() * this.gameLogic.getBoardSize() + 1];
             display.printBoard(this.gameLogic.getBoard());
-            if (this.player1Turn) {
+            if (this.isPlayer1TurnNow) {
                 if (this.gameLogic.checkAndAnnounceFinish(noMoreActionsB, noMoreActionW, display)) {
                     return;
                 }
-                moves = this.gameLogic.possibleMoves(pArr, moves, this.player1.getColor());
+                moves = this.gameLogic.possibleMoves(pArr, moves, this.Player1.getColor());
                 if (moves == 0) {
-                    this.player1.noMove(this.display);
+                    this.Player1.noMove(this.display);
                     noMoreActionsB = true;
                 } else {
                     do {
@@ -56,11 +56,11 @@ public class Game {
                     //display.printPair(new ReversiBase.Pair(userInput.getRow() - 1, userInput.getCol() - 1));
                     noMoreActionsB = false;
                 }
-                this.player1Turn = false;
+                this.isPlayer1TurnNow = false;
             } else {
                 moves = this.gameLogic.possibleMoves(pArr, moves, player2.getColor());
                 if (moves == 0) {
-                    this.player2.noMove(this.display);
+                    this.Player2.noMove(this.display);
                     noMoreActionW = true;
                 } else {
                     do {
@@ -70,7 +70,7 @@ public class Game {
                     //display.printPair(new ReversiBase.Pair(userInput.getRow() - 1, userInput.getCol() - 1));
                     noMoreActionW = false;
                 }
-                this.player1Turn = true;
+                this.isPlayer1TurnNow = true;
             }
         }
     }

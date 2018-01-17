@@ -5,7 +5,7 @@ package ReversiBase;
 import javafx.scene.paint.Color;
 
 public abstract class GameLogic {
-    protected Board board;
+    protected Board gameBoard;
     protected Color FirstColor, SecondColor;
 
     /**
@@ -16,7 +16,7 @@ public abstract class GameLogic {
      * @return
      */
     public boolean checkAndAnnounceFinish(boolean noMoreActionsB, boolean noMoreActionsW, Display display) {
-        if (this.board.isBoardFull()) {
+        if (this.gameBoard.isBoardFull()) {
             display.printString("Current board:");
             display.printBoard(board);
             display.printString("The board is full");
@@ -47,7 +47,7 @@ public abstract class GameLogic {
      * This method returns the current board (used for cloning).
      */
     public Board getBoard() {
-        return this.board;
+        return this.gameBoard;
     }
 
     /**
@@ -61,10 +61,10 @@ public abstract class GameLogic {
         int size = this.getBoardSize();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (this.board.getCellStatus(new Pair(i, j)).getColor().toString()
+                if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor().toString()
                         .equals(SecondColor.toString())) {
                     secondPlayerCells++;
-                } else if (this.board.getCellStatus(new Pair(i, j)).getColor().toString()
+                } else if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor().toString()
                         .equals(FirstColor.toString())) {
                     firstPlayerCells++;
                 }
@@ -85,7 +85,7 @@ public abstract class GameLogic {
      * @return size of the board
      */
     public int getBoardSize() {
-        return this.board.getSize();
+        return this.gameBoard.getSize();
     }
 
     public GameLogic() {
@@ -99,7 +99,7 @@ public abstract class GameLogic {
      * @param SecondColor inputted SecondColor.
      */
     public GameLogic(Board board, Color FirstColor, Color SecondColor) {
-        this.board = board;
+        this.gameBoard = board;
         this.SecondColor = SecondColor;
         this.FirstColor = FirstColor;
     }
@@ -115,10 +115,10 @@ public abstract class GameLogic {
         int boardSize = this.getBoardSize();
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                if (this.board.getCellStatus(new Pair(i, j)).getColor().toString()
+                if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor().toString()
                         .equals(this.SecondColor.toString())) {
                     secondPlayerCells++;
-                } else if (this.board.getCellStatus(new Pair(i, j))
+                } else if (this.gameBoard.getCellStatus(new Pair(i, j))
                         .getColor().toString().equals(this.FirstColor.toString())) {
                     firstPlayerCells++;
                 }
@@ -137,7 +137,7 @@ public abstract class GameLogic {
         int boardSize = this.getBoardSize();
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                if (this.board.getCellStatus(new Pair(i, j)).getColor().toString()
+                if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor().toString()
                         .equals(this.FirstColor.toString())) {
                     firstPlayerCells++;
                 }
@@ -156,7 +156,7 @@ public abstract class GameLogic {
         int boardSize = this.getBoardSize();
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                if (this.board.getCellStatus(new Pair(i, j)).getColor()
+                if (this.gameBoard.getCellStatus(new Pair(i, j)).getColor()
                         .toString().equals(this.SecondColor.toString())) {
                     secondPlayerCells++;
                 }

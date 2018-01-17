@@ -5,8 +5,6 @@ package ReversiBase;
 import javafx.scene.paint.Color;
 
 public class RegularGameLogic extends GameLogic {
-
-
     /**
      * Function to check if the move is valid.
      * @param p wanted cell.

@@ -5,7 +5,7 @@ package ReversiBase;
 import javafx.scene.paint.Color;
 
 public class GamePiece {
-    private Color color;
+    private Color MyColor;
     private boolean isEmpty;
 
     /**
@@ -24,22 +24,22 @@ public class GamePiece {
     }
 
     /**
-     * this method returns the color of the cell
-     * @return color og the cell
+     * this method returns MyColor of the cell
+     * @return MyColor og the cell
      */
     public Color getColor() {
         if (this.isEmpty) {
             return Color.WHEAT;
         }
-        return color;
+        return MyColor;
     }
 
     /**
-     * this method sets the color og the cell
-     * @param color a given color
+     * this method sets the MyColor og the cell
+     * @param MyColor a given MyColor
      */
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColor(Color MyColor) {
+        this.MyColor = MyColor;
         this.isEmpty = false;
     }
 }

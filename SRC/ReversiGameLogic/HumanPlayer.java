@@ -12,7 +12,7 @@ public class HumanPlayer implements Player {
 
     /**
      * Constructor for human player.
-     * @param isFirst
+     * @param isFirstPlayer
      * @param gamePieceColor
      */
     HumanPlayer(boolean isFirst, Color gamePieceColor) {

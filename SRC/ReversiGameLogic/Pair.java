@@ -2,14 +2,14 @@
 package ReversiBase;
 
 public class Pair {
-    private int row, column;
+    private int x, y;
 
     /**
      * This method returns the row of the pair.
      * @return row.
      */
     public int getRow()  {
-        return this.row;
+        return this.x;
     }
 
     /**
@@ -17,7 +17,7 @@ public class Pair {
      * @return column.
      */
     public int getCol()  {
-        return this.column;
+        return this.y;
     }
 
     /**
@@ -26,7 +26,7 @@ public class Pair {
      * @param column column.
      */
     public Pair(int row, int column) {
-        this.row = row;
-        this.column = column;
+        this.x = row;
+        this.y = column;
     }
 }

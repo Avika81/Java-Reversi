@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
  * This class features a game board.
  */
 public class Board {
-    private GamePiece[][] gamePieces;
-    private int size;
+    private GamePiece[][] PiecesMatrix;
+    private int SizeOfBoard;
     private Color defaultColorPlayer1;
     private Color defaultColorPlayer2;
 
@@ -19,19 +19,19 @@ public class Board {
      * @param defaultColorPlayer2 given not starting color
      */
     public Board(int size, Color defaultColorPlayer1, Color defaultColorPlayer2) {
-        this.size = size;
+        this.SizeOfBoard = size;
         gamePieces = new GamePiece[size][size];
         this.defaultColorPlayer1 = defaultColorPlayer1;
         this.defaultColorPlayer2 = defaultColorPlayer2;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                this.gamePieces[i][j] = new GamePiece();
+                this.PiecesMatrix[i][j] = new GamePiece();
             }
         }
-        this.gamePieces[this.size / 2 - 1][this.size / 2 - 1].setColor(defaultColorPlayer2);
-        this.gamePieces[this.size / 2][this.size / 2].setColor(defaultColorPlayer2);
-        this.gamePieces[this.size / 2 - 1][this.size / 2].setColor(defaultColorPlayer1);
-        this.gamePieces[this.size / 2][this.size / 2 - 1].setColor(defaultColorPlayer1);
+        this.PiecesMatrix[this.SizeOfBoard / 2 - 1][this.SizeOfBoard / 2 - 1].setColor(defaultColorPlayer2);
+        this.PiecesMatrix[this.SizeOfBoard / 2][this.SizeOfBoard / 2].setColor(defaultColorPlayer2);
+        this.PiecesMatrix[this.SizeOfBoard / 2 - 1][this.SizeOfBoard / 2].setColor(defaultColorPlayer1);
+        this.PiecesMatrix[this.SizeOfBoard / 2][this.SizeOfBoard / 2 - 1].setColor(defaultColorPlayer1);
     }
 
     /**
@@ -41,8 +41,8 @@ public class Board {
      * @return cell's status.
      */
     public GamePiece getCellStatus(Pair p) {
-        if (p.getRow() >= 0 && p.getRow() < this.size && p.getCol() >= 0 && p.getCol() < this.size) {
-            return this.gamePieces[p.getRow()][p.getCol()];
+        if (p.getRow() >= 0 && p.getRow() < this.SizeOfBoard && p.getCol() >= 0 && p.getCol() < this.SizeOfBoard) {
+            return this.PiecesMatrix[p.getRow()][p.getCol()];
         }
         GamePiece emptyGamePiece = new GamePiece();
         return emptyGamePiece;
@@ -55,8 +55,8 @@ public class Board {
      * @param c desired input Color.
      */
     public void changeStatus(Pair p, Color c) {
-        if (p.getRow() >= 0 && p.getRow() < this.size && p.getCol() >= 0 && p.getCol() < this.size) {
-            this.gamePieces[p.getRow()][p.getCol()].setColor(c);
+        if (p.getRow() >= 0 && p.getRow() < this.SizeOfBoard && p.getCol() >= 0 && p.getCol() < this.SizeOfBoard) {
+            this.PiecesMatrix[p.getRow()][p.getCol()].setColor(c);
         }
     }
 
@@ -66,7 +66,7 @@ public class Board {
      * @return the matrix of the board
      */
     public GamePiece[][] getGamePieces() {
-        return this.gamePieces;
+        return this.PiecesMatrix;
     }
 
     /**
@@ -75,9 +75,9 @@ public class Board {
      * @return true/false.
      */
     public boolean isBoardFull() {
-        for (int i = 0; i < this.size; i++) {
-            for (int j = 0; j < this.size; j++) {
-                if (this.gamePieces[i][j].isEmpty()) {
+        for (int i = 0; i < this.SizeOfBoard; i++) {
+            for (int j = 0; j < this.SizeOfBoard; j++) {
+                if (this.PiecesMatrix[i][j].isEmpty()) {
                     return false;
                 }
             }
@@ -91,7 +91,7 @@ public class Board {
      * @return
      */
     public int getSize() {
-        return this.size;
+        return this.SizeOfBoard;
     }
 
     /**
