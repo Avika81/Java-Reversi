@@ -6,17 +6,7 @@ import javafx.scene.paint.Color;
 
 public class RegularGameLogic extends GameLogic {
 
-    /**
-     * The constructor for the game logic.
-     * @param board: inputted board.
-     * @param startingColor: inputted color for starting player.
-     * @param notStartingColor: inputted color for not starting player.
-     */
-    public RegularGameLogic(Board board, Color startingColor, Color notStartingColor) {
-        this.board = board;
-        this.notStartingColor = notStartingColor;
-        this.startingColor = startingColor;
-    }
+
     /**
      * Function to check if the move is valid.
      * @param p wanted cell.
@@ -98,34 +88,19 @@ public class RegularGameLogic extends GameLogic {
         }
         return false;
     }
+
     /**
-     * Function to update all the possible moves.
-     * @param pairArr inputted array to update.
-     * @param index number of moves.
-     * @param player player's color.
+     * The constructor for the game logic.
+     * @param board: inputted board.
+     * @param startingColor: inputted color for starting player.
+     * @param notStartingColor: inputted color for not starting player.
      */
-    @Override
-    public int possibleMoves(Pair pairArr[], int index, Color player) {
-        int size = this.getBoardSize();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (this.board.getCellStatus(new Pair(i, j)).isEmpty()) {
-                    if (player.toString().equals(this.startingColor.toString())) {
-                        if (checkCell(new Pair(i, j), this.notStartingColor, this.startingColor)) {
-                            pairArr[index] = new Pair(i, j);
-                            index++;
-                        }
-                    } else {
-                        if (checkCell(new Pair(i, j), this.startingColor, this.notStartingColor)) {
-                            pairArr[index] = new Pair(i, j);
-                            index++;
-                        }
-                    }
-                }
-            }
-        }
-        return index;
+    public RegularGameLogic(Board board, Color startingColor, Color notStartingColor) {
+        this.board = board;
+        this.notStartingColor = notStartingColor;
+        this.startingColor = startingColor;
     }
+
     /**
      * Function to check if the cell is a possible move.
      * @param p inputted pair.
@@ -204,17 +179,36 @@ public class RegularGameLogic extends GameLogic {
         }
         return false;
     }
+
     /**
-     * Function to flip the right cells after the user played it's turn.
-     * @param p inputted pair (wanted move).
-     * @param opponentP opponent's player color.
-     * @param player: player's color.
+     * Function to update all the possible moves.
+     * @param pairArr inputted array to update.
+     * @param index number of moves.
+     * @param player player's color.
      */
     @Override
-    public void flipCell(Pair p, Color opponentP, Color player) {
-        this.board.changeStatus(new Pair(p.getRow() - 1, p.getCol() - 1), player);
-        flipAllDirections(p,opponentP, player);
+    public int possibleMoves(Pair pairArr[], int index, Color player) {
+        int size = this.getBoardSize();
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (this.board.getCellStatus(new Pair(i, j)).isEmpty()) {
+                    if (player.toString().equals(this.startingColor.toString())) {
+                        if (checkCell(new Pair(i, j), this.notStartingColor, this.startingColor)) {
+                            pairArr[index] = new Pair(i, j);
+                            index++;
+                        }
+                    } else {
+                        if (checkCell(new Pair(i, j), this.startingColor, this.notStartingColor)) {
+                            pairArr[index] = new Pair(i, j);
+                            index++;
+                        }
+                    }
+                }
+            }
+        }
+        return index;
     }
+
     /**
      * This method checks the users input validation (right format & picking a move from the possible moves)
      * @param p wanted users move.
@@ -231,6 +225,19 @@ public class RegularGameLogic extends GameLogic {
         }
         return false;
     }
+
+    /**
+     * Function to flip the right cells after the user played it's turn.
+     * @param p inputted pair (wanted move).
+     * @param opponentP opponent's player color.
+     * @param player: player's color.
+     */
+    @Override
+    public void flipCell(Pair p, Color opponentP, Color player) {
+        this.board.changeStatus(new Pair(p.getRow() - 1, p.getCol() - 1), player);
+        flipAllDirections(p,opponentP, player);
+    }
+
     /**
      * This method flips the matching cells on the specific direction of the pair.
      * @param p inputted pair.
@@ -263,6 +270,7 @@ public class RegularGameLogic extends GameLogic {
             y = y + yDirection;
         }
     }
+
     /**
      * This method flips the matching cells on alll directions of the pair.
      * @param p inputted pair.

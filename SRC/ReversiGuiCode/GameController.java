@@ -1,7 +1,7 @@
-package ReversiGUI;
+secondColorpackage ReversiGUI;
 
 
-//tons of imports for the gui: 
+//tons of imports for the gui:
 import ReversiBase.Board;
 import ReversiBase.GameLogic;
 import ReversiBase.Pair;
@@ -29,10 +29,10 @@ import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
     private Board board;
-    private GameLogic gameLogic;
+    private GameLogic gameLogicObject;
     private boolean isPlayer1;
-    private String player1Color;
-    private String player2Color;
+    private String firstColor;
+    private String secondColor;
     private boolean noMoreActionsP1;
     private boolean noMoreActionsP2;
     @FXML
@@ -57,71 +57,6 @@ public class GameController implements Initializable {
 
 
     /**
-     * This method initializes the game controller.
-     *
-     * @param location  isn't used.
-     * @param resources isn't used.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.noMoreActionsP1 = false;
-        this.noMoreActionsP2 = false;
-        SettingsParser parser = new SettingsParser();
-        parser.parseSettingsFile();
-        int size = parser.getBoardSize();
-        String startingPlayer = parser.getStartingPlayer();
-        if (startingPlayer.equals("player1")) {
-            player1Color = parser.getPlayer1Color();
-            player2Color = parser.getPlayer2Color();
-        } else {
-            player1Color = parser.getPlayer2Color();
-            player2Color = parser.getPlayer1Color();
-        }
-        this.board = new Board(size, Color.web(player1Color), Color.web(player2Color));
-        this.guiBoard = new GuiBoard(board);
-        root.getChildren().add(0, guiBoard);
-        root.setAlignment(Pos.TOP_LEFT);
-        guiBoard.draw();
-        VBox gameStatus = new VBox();
-        currentPlayer = new Label("\nCurrent player: Player 1");
-        if(firstIter) {
-            colorPlayer = new Circle(10, Color.web(this.player1Color));
-        }
-        firstIter = false;
-        player1Score = new Label("First player score: 2");
-        player2Score = new Label("Second player score: 2");
-        message = new Label("Player 1:\nIt's your move!");
-        extraMessage = new Label("");
-        extraMessage.setFont(new Font(15));
-        message.setFont(new Font(15));
-        this.quit = new Button("Quit");
-        this.quit.setOnAction(ev -> {
-            loadFXML("MenuControllerFXML.fxml", 650, 600, ev);
-        });
-        root.setAlignment(Pos.TOP_LEFT);
-        root.setSpacing(20);
-        gameStatus.setSpacing(10);
-        root.widthProperty().addListener((observable, oldValue, newValue) -> {
-            double boardNewWidth = newValue.doubleValue() - 200;
-            guiBoard.setPrefWidth(boardNewWidth);
-            guiBoard.draw();
-        });
-
-        root.heightProperty().addListener((observable, oldValue, newValue) -> {
-            guiBoard.setPrefHeight(newValue.doubleValue());
-            guiBoard.draw();
-        });
-        gameStatus.getChildren().addAll(currentPlayer, colorPlayer, player1Score, player2Score, message, extraMessage, quit);
-        root.getChildren().add(gameStatus);
-        this.isPlayer1 = true;
-        this.gameLogic = new RegularGameLogic(this.board, Color.web(this.player1Color), Color.web(this.player2Color));
-        guiBoard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            Pair move = convertClickToPair(e.getX(), e.getY());
-            this.singleMove(move);
-        });
-    }
-
-    /**
      * Perform a single move of a player (after a mouse click on the board has been made)
      *
      * @param move the move of the player
@@ -132,32 +67,32 @@ public class GameController implements Initializable {
             return;
         }
         int moves = 0;
-        Pair pArr[] = new Pair[this.gameLogic.getBoardSize() * this.gameLogic.getBoardSize() + 1];
+        Pair pArr[] = new Pair[this.gameLogicObject.getBoardSize() * this.gameLogicObject.getBoardSize() + 1];
         if (this.isPlayer1) {
-            moves = gameLogic.possibleMoves(pArr, moves, Color.web(this.player1Color));
+            moves = gameLogicObject.possibleMoves(pArr, moves, Color.web(this.firstColor));
         } else {
-            moves = gameLogic.possibleMoves(pArr, moves, Color.web(this.player2Color));
+            moves = gameLogicObject.possibleMoves(pArr, moves, Color.web(this.secondColor));
         }
 
-        boolean validMove = this.gameLogic.checkInput(move, pArr, moves);
+        boolean validMove = this.gameLogicObject.checkInput(move, pArr, moves);
         if (validMove) {
             if (this.isPlayer1) {
-                this.gameLogic.flipCell(move, Color.web(this.player2Color), Color.web(this.player1Color));
+                this.gameLogicObject.flipCell(move, Color.web(this.secondColor), Color.web(this.firstColor));
                 noMoreActionsP1 = false;
                 this.isPlayer1 = false;
                 if (this.checkFinish()) {
                     return;
                 }
                 int moves2 = 0;
-                pArr = new Pair[this.gameLogic.getBoardSize() * this.gameLogic.getBoardSize() + 1];
-                moves2 = gameLogic.possibleMoves(pArr, moves2, Color.web(this.player2Color));
+                pArr = new Pair[this.gameLogicObject.getBoardSize() * this.gameLogicObject.getBoardSize() + 1];
+                moves2 = gameLogicObject.possibleMoves(pArr, moves2, Color.web(this.secondColor));
                 if (moves2 == 0) {
                     message.setText("Player 2:\nYou have\nno more moves!");
                     this.isPlayer1 = true;
                     this.noMoreActionsP2 = true;
                     int moves3 = 0;
-                    pArr = new Pair[this.gameLogic.getBoardSize() * this.gameLogic.getBoardSize() + 1];
-                    moves3 = gameLogic.possibleMoves(pArr, moves3, Color.web(this.player1Color));
+                    pArr = new Pair[this.gameLogicObject.getBoardSize() * this.gameLogicObject.getBoardSize() + 1];
+                    moves3 = gameLogicObject.possibleMoves(pArr, moves3, Color.web(this.firstColor));
                     if (moves3 == 0) {
                         this.noMoreActionsP1 = true;
                     }
@@ -165,23 +100,23 @@ public class GameController implements Initializable {
                         return;
                     }
                     currentPlayer.setText("\nCurrent Player: Player 1");
-                    colorPlayer.setFill(Color.web(this.player1Color));
+                    colorPlayer.setFill(Color.web(this.firstColor));
 
                     message.setText("Player 1:\nIt's your move!");
                     guiBoard.setBoard(this.board);
                     guiBoard.draw();
-                    int firstScore = gameLogic.getFirstPlayerScore();
-                    int secondScore = gameLogic.getSecondPlayerScore();
+                    int firstScore = gameLogicObject.getFirstPlayerScore();
+                    int secondScore = gameLogicObject.getSecondPlayerScore();
                     player1Score.setText("Player 1 score: " + firstScore);
                     player2Score.setText("Player 2 score: " + secondScore);
                 } else {
                     currentPlayer.setText("\nCurrent Player: Player 2");
-                    colorPlayer.setFill(Color.web(this.player2Color));
+                    colorPlayer.setFill(Color.web(this.secondColor));
                     message.setText("Player 2:\nIt's your move!");
                     guiBoard.setBoard(this.board);
                     guiBoard.draw();
-                    int firstScore = gameLogic.getFirstPlayerScore();
-                    int secondScore = gameLogic.getSecondPlayerScore();
+                    int firstScore = gameLogicObject.getFirstPlayerScore();
+                    int secondScore = gameLogicObject.getSecondPlayerScore();
                     player1Score.setText("Player 1 score: " + firstScore);
                     player2Score.setText("Player 2 score: " + secondScore);
                     if (this.checkFinish()) {
@@ -189,22 +124,22 @@ public class GameController implements Initializable {
                     }
                 }
             } else {
-                this.gameLogic.flipCell(move, Color.web(this.player1Color), Color.web(this.player2Color));
+                this.gameLogicObject.flipCell(move, Color.web(this.firstColor), Color.web(this.secondColor));
                 noMoreActionsP2 = false;
                 if (this.checkFinish()) {
                     return;
                 }
                 this.isPlayer1 = true;
                 int moves2 = 0;
-                pArr = new Pair[this.gameLogic.getBoardSize() * this.gameLogic.getBoardSize() + 1];
-                moves2 = gameLogic.possibleMoves(pArr, moves2, Color.web(this.player1Color));
+                pArr = new Pair[this.gameLogicObject.getBoardSize() * this.gameLogicObject.getBoardSize() + 1];
+                moves2 = gameLogicObject.possibleMoves(pArr, moves2, Color.web(this.firstColor));
                 if (moves2 == 0) {
                     message.setText("Player 1:\nYou have\nno more moves!");
                     this.isPlayer1 = false;
                     this.noMoreActionsP1 = true;
                     int moves3 = 0;
-                    pArr = new Pair[this.gameLogic.getBoardSize() * this.gameLogic.getBoardSize() + 1];
-                    moves3 = gameLogic.possibleMoves(pArr, moves3, Color.web(this.player2Color));
+                    pArr = new Pair[this.gameLogicObject.getBoardSize() * this.gameLogicObject.getBoardSize() + 1];
+                    moves3 = gameLogicObject.possibleMoves(pArr, moves3, Color.web(this.secondColor));
                     if (moves3 == 0) {
                         this.noMoreActionsP2 = true;
                     }
@@ -213,22 +148,22 @@ public class GameController implements Initializable {
                     }
                     currentPlayer.setText("\nCurrent Player: Player 2");
                     message.setText("Player 2:\nIt's your move!");
-                    colorPlayer.setFill(Color.web(this.player2Color));
+                    colorPlayer.setFill(Color.web(this.secondColor));
                     guiBoard.setBoard(this.board);
                     guiBoard.draw();
-                    int firstScore = gameLogic.getFirstPlayerScore();
-                    int secondScore = gameLogic.getSecondPlayerScore();
+                    int firstScore = gameLogicObject.getFirstPlayerScore();
+                    int secondScore = gameLogicObject.getSecondPlayerScore();
                     player1Score.setText("Player 1 score: " + firstScore);
                     player2Score.setText("Player 2 score: " + secondScore);
                 } else {
                     currentPlayer.setText("\nCurrent Player: Player 1");
                     message.setText("Player 1:\nIt's your move!");
-                    colorPlayer.setFill(Color.web(this.player1Color));
+                    colorPlayer.setFill(Color.web(this.firstColor));
 
                     guiBoard.setBoard(this.board);
                     guiBoard.draw();
-                    int firstScore = gameLogic.getFirstPlayerScore();
-                    int secondScore = gameLogic.getSecondPlayerScore();
+                    int firstScore = gameLogicObject.getFirstPlayerScore();
+                    int secondScore = gameLogicObject.getSecondPlayerScore();
                     player1Score.setText("Player 1 score: " + firstScore);
                     player2Score.setText("Player 2 score: " + secondScore);
                     if (this.checkFinish()) {
@@ -259,27 +194,69 @@ public class GameController implements Initializable {
         }
     }
 
-
     /**
-     * This method convert a mouse click position to a position in the board.
+     * This method initializes the game controller.
      *
-     * @param x coordinate of the click.
-     * @param y coordinate of the click.
-     * @return the new pair
+     * @param location  isn't used.
+     * @param resources isn't used.
      */
-    private Pair convertClickToPair(double x, double y) {
-        double cellHight = this.guiBoard.getCellHight();
-        double cellWidth = this.guiBoard.getCellwidth();
-        for (int i = 0; i < this.board.getSize(); i++) {
-            for (int j = 0; j < this.board.getSize(); j++) {
-                if (x >= i * cellWidth && x <= (i + 1) * cellWidth) {
-                    if (y >= j * cellHight && y <= (j + 1) * cellHight) {
-                        return new Pair(j + 1, i + 1);
-                    }
-                }
-            }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.noMoreActionsP1 = false;
+        this.noMoreActionsP2 = false;
+        SettingsParser parser = new SettingsParser();
+        parser.parseSettingsFile();
+        int size = parser.getBoardSize();
+        String startingPlayer = parser.getStartingPlayer();
+        if (startingPlayer.equals("player1")) {
+            firstColor = parser.getPlayer1Color();
+            secondColor = parser.getPlayer2Color();
+        } else {
+            firstColor = parser.getPlayer2Color();
+            secondColor = parser.getPlayer1Color();
         }
-        return new Pair(-1, -1);
+        this.board = new Board(size, Color.web(firstColor), Color.web(secondColor));
+        this.guiBoard = new GuiBoard(board);
+        root.getChildren().add(0, guiBoard);
+        root.setAlignment(Pos.TOP_LEFT);
+        guiBoard.draw();
+        VBox gameStatus = new VBox();
+        currentPlayer = new Label("\nCurrent player: Player 1");
+        if(firstIter) {
+            colorPlayer = new Circle(10, Color.web(this.firstColor));
+        }
+        firstIter = false;
+        player1Score = new Label("First player score: 2");
+        player2Score = new Label("Second player score: 2");
+        message = new Label("Player 1:\nIt's your move!");
+        extraMessage = new Label("");
+        extraMessage.setFont(new Font(15));
+        message.setFont(new Font(15));
+        this.quit = new Button("Quit");
+        this.quit.setOnAction(ev -> {
+            loadFXML("MenuControllerFXML.fxml", 650, 600, ev);
+        });
+        root.setAlignment(Pos.TOP_LEFT);
+        root.setSpacing(20);
+        gameStatus.setSpacing(10);
+        root.widthProperty().addListener((observable, oldValue, newValue) -> {
+            double boardNewWidth = newValue.doubleValue() - 200;
+            guiBoard.setPrefWidth(boardNewWidth);
+            guiBoard.draw();
+        });
+
+        root.heightProperty().addListener((observable, oldValue, newValue) -> {
+            guiBoard.setPrefHeight(newValue.doubleValue());
+            guiBoard.draw();
+        });
+        gameStatus.getChildren().addAll(currentPlayer, colorPlayer, player1Score, player2Score, message, extraMessage, quit);
+        root.getChildren().add(gameStatus);
+        this.isPlayer1 = true;
+        this.gameLogicObject = new RegularGameLogic(this.board, Color.web(this.firstColor), Color.web(this.secondColor));
+        guiBoard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            Pair move = convertClickToPair(e.getX(), e.getY());
+            this.singleMove(move);
+        });
     }
 
 
@@ -308,32 +285,34 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Check if the game is over.
+     * This method convert a mouse click position to a position in the board.
      *
-     * @return if the game is over.
+     * @param x coordinate of the click.
+     * @param y coordinate of the click.
+     * @return the new pair
      */
-    private boolean checkFinish() {
-        if (this.board.isBoardFull() || (this.noMoreActionsP2 && this.noMoreActionsP1)) {
-            currentPlayer.setText("\nCurrent Player: Player 2");
-            message.setText("Player 2:\nIt's your move!");
-            guiBoard.setBoard(this.board);
-            guiBoard.draw();
-            int firstScore = gameLogic.getFirstPlayerScore();
-            int secondScore = gameLogic.getSecondPlayerScore();
-            player1Score.setText("Player 1 score: " + firstScore);
-            player2Score.setText("Player 2 score: " + secondScore);
-            announceWinner();
-            return true;
+    private Pair convertClickToPair(double x, double y) {
+        double cellHight = this.guiBoard.getCellHight();
+        double cellWidth = this.guiBoard.getCellwidth();
+        for (int i = 0; i < this.board.getSize(); i++) {
+            for (int j = 0; j < this.board.getSize(); j++) {
+                if (x >= i * cellWidth && x <= (i + 1) * cellWidth) {
+                    if (y >= j * cellHight && y <= (j + 1) * cellHight) {
+                        return new Pair(j + 1, i + 1);
+                    }
+                }
+            }
         }
-        return false;
+        return new Pair(-1, -1);
     }
+
 
     /**
      * Announce a game winner if the game is finished.
      */
     public void announceWinner() {
-        int firstScore = gameLogic.getFirstPlayerScore();
-        int secondScore = gameLogic.getSecondPlayerScore();
+        int firstScore = gameLogicO.getFirstPlayerScore();
+        int secondScore = gameLogicO.getSecondPlayerScore();
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         VBox root = new VBox();
@@ -349,12 +328,12 @@ public class GameController implements Initializable {
         } else {
             if (secondScore > firstScore) {
                 label.setText("Game Over\nSecond player wins!");
-                Circle circle = new Circle(10, Color.web(this.player2Color));
+                Circle circle = new Circle(10, Color.web(this.secondColor));
                 root.getChildren().addAll(label, circle, quit);
 
             } else {
                 label.setText("Game Over\nFirst player wins!");
-                Circle circle = new Circle(10, Color.web(this.player1Color));
+                Circle circle = new Circle(10, Color.web(this.firstColor));
                 root.getChildren().addAll(label, circle, quit);
             }
         }
@@ -362,5 +341,26 @@ public class GameController implements Initializable {
         root.setPrefSize(scene.getWidth(), scene.getHeight());
         stage.setScene(scene);
         stage.showAndWait();
+    }
+
+    /**
+     * Check if the game is over.
+     *
+     * @return if the game is over.
+     */
+    private boolean checkFinish() {
+        if (this.board.isBoardFull() || (this.noMoreActionsP2 && this.noMoreActionsP1)) {
+            currentPlayer.setText("\nCurrent Player: Player 2");
+            message.setText("Player 2:\nIt's your move!");
+            guiBoard.setBoard(this.board);
+            guiBoard.draw();
+            int firstScore = gameLogicO.getFirstPlayerScore();
+            int secondScore = gameLogicO.getSecondPlayerScore();
+            player1Score.setText("Player 1 score: " + firstScore);
+            player2Score.setText("Player 2 score: " + secondScore);
+            announceWinner();
+            return true;
+        }
+        return false;
     }
 }
