@@ -1,72 +1,175 @@
+commit 23285f080723235c2e27ebd9003af9e5470b2f96
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Mon Jan 15 12:34:52 2018 +0200
+
+    finnaly finished  ?
+
+commit 34778a1c528132f44fd4966d6cbfbf6f489fcf92
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Mon Jan 15 12:15:28 2018 +0200
+
+    nothing
+
+commit d1540b7ccbee6b39c5526bc7f7c699377dc321d2
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Mon Jan 15 11:12:53 2018 +0200
+
+    worked on stuff
+
+commit 21051cf97db3848837cee22fdd289cf04224a9bf
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Mon Jan 15 10:07:13 2018 +0200
+
+    removed the make file for the HAGASHA
+
+commit a2b518f7be466edcbe19a31de78b9ee2739186e2
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Mon Jan 15 9:06:06 2018 +0200
+
+    I have no faith in mankind
+
+commit 0b9af17079a62d9222c43e1c3c5dfc7f32bfd998
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Mon Jan 15 8:02:35 2018 +0200
+
+    nothing
+
+commit 1286d121396d1ba8847c46d3493bed602d9c7d7b
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Mon Jan 15 00:02:01 2018 +0200
+
+    hopefully working now
+
+commit 6a5d4df607e2aa2fbaa77bb2f24eb57e86a79eb5
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Sun Jan 14 23:58:21 2018 +0200
+
+    123
+
+commit ce3118e39317de3d61e271bfa608150d18f15adf
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Sun Jan 14 22:52:31 2018 +0200
+
+    debugging sucks
+
+commit d19adb7dafcccdbe332977e70e3717d6cc2494d1
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Sun Jan 14 22:01:03 2018 +0200
+
+    added some comments
+
+commit 7cd7d37aa35c2a94664739b7a0a0f6a8ad1dbe99
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Sun Jan 14 11:50:28 2018 +0200
+
+    debugged the project :(
+
+commit e0e4af0df24dae78fcd562598cb34d14421be81d
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Sun Jan 13 11:47:29 2018 +0200
+
+    blah blah
+
+commit 7b193195564dc54e43f85b5ec8d2e3ff5707baaf
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Sat Jan 13 18:45:16 2018 +0200
+
+    debugged a bit
+
+commit 56955e7470ec72e23bd23d1ae8a41d9bdb87906c
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Sat Jan 13 15 11:37:44 2018 +0200
+
+    started working on stuff
+
+commit a793f2298e899dd5cc3d4bad7aa457e6e5963c8a
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Sat Jan 13 11:30:28 2018 +0200
+
+    saved some unsaved files
+
+commit 3b347d29fcaaf6c707bfed8604e3b6459f2b401d
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Fri Jan 11:29:50 2018 +0200
+
+    debugged the project (hopefully it works now)
+
+commit 0e4389fe3508b3ad6718dc80aee072fc610f0842
+Author: Avi Kadria <avi.kadria3@gmail.com>
+Date:   Fri Jan 05:24:43 2018 +0200
+
+    nothing special
+    added logs and such to etc
+
 commit 60def98941118a4a593a985759e6cddaed4b6a7c
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:35:43 2018 +0200
+Date:   Fri Jan 11:29:50 10:35:43 2018 +0200
 
-    added all the project! finally working now
+    added all the project! finally working now ?
 
 commit d23c4cdbc81de674e39774b8c2818ebea0546e97
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:34:22 2018 +0200
+Date:   Wed Jan 10 8:34:22 2018 +0200
 
     added gui classes (after some debugs)
 
 commit bcba944c3ed52491988d338c5119c82e29a89f0f
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:33:39 2018 +0200
+Date:   Wed Jan 10 10:33:39 2018 +0200
 
     another xml file :(
 
 commit c19d2f68ecab0188d27c352fb47b24c58500c78f
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:33:18 2018 +0200
+Date:   Wed Jan 10 10:33:18 2018 +0200
 
     nothing special.
     added java files
 
 commit f5913ba4bc4cefd9e2535bab6f594a4768f4c74a
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:32:54 2018 +0200
+Date:   Wed Jan 10 10:32:54 2018 +0200
 
     added the wanted controller applications
 
 commit d3d2200e7e1111326b64d9bb6dfad9763b6c8f89
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:32:18 2018 +0200
+Date:   Wed Jan 10 10:32:18 2018 +0200
 
     added the needed settings classes (hopefully it works)
 
 commit d3567b073b5416ed8722c66cf28af682be0b1107
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:31:17 2018 +0200
+Date:   Wed Jan 10 10:31:17 2018 +0200
 
     FINISHED THE GAME LOGIC!!!! working (I hope)
 
 commit 822e417c245977029c7c6e473fb30e734a08097e
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:30:19 2018 +0200
+Date:   Wed Jan 10 10:30:19 2018 +0200
 
     added more classes needed for the project
 
 commit a174430cbcab7c4a56c117beb8b0a5a987b0d930
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:28:56 2018 +0200
+Date:   Wed Jan 10 10:28:56 2018 +0200
 
     added the player and twicked th project a bit
 
 commit 27c291de991254f86e3499d00271ecf446547e09
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:28:22 2018 +0200
+Date:   Wed Jan 10 10:28:22 2018 +0200
 
     added the ami game classes.
 
 commit 1e0ead293b9eb3781ffebb35f2bb64fc41856ac2
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 10:26:36 2018 +0200
+Date:   Wed Jan 10 10:26:36 2018 +0200
 
     added the board class to the project
 
 commit 5af55180fbda34866d154f48404d8297a50cde41
 Author: Avi Kadria <avi.kadria3@gmail.com>
-Date:   Wed Jan 17 09:57:13 2018 +0200
+Date:   Wed Jan 10 09:57:13 2018 +0200
 
     Initial commit
